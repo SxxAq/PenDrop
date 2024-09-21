@@ -61,14 +61,14 @@ const Blog = () => {
           </span>
           <span>{new Date(post.createdAt).toLocaleString()}</span>
         </div>
-        {user && user.id === post.author?._id && (
+        {/* {user && user.id === post.author?._id && (
           <Link
             to={`/edit/${post._id}`}
             className="inline-block bg-teal-500 text-white px-6 py-2 rounded-md hover:bg-teal-600 transition duration-300"
           >
             Edit Post
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );

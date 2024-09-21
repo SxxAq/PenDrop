@@ -49,7 +49,7 @@ const Home = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 max-w-4xl mx-auto">
       {currentPosts.map((post) => (
         <div
           key={post._id}

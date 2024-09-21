@@ -33,19 +33,24 @@ const Profile = () => {
     fetchUserBlogs();
   }, [user, URL]);
 
-  const handleDelete = async (postId) => {
-    try {
-      await axios.delete(`/api/posts/${postId}`, {
-        headers: { "x-auth-token": user.token }, // Include token for auth
-      });
-      setUserBlogs(userBlogs.filter((blog) => blog._id !== postId));
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          "An error occurred while deleting the blog"
-      );
-    }
-  };
+const handleDelete = async (postId) => {
+  console.log('Token:', user.token); // Check the token here
+  try {
+    await axios.delete(`/api/posts/${postId}`, {
+      headers: {
+        "Authorization": `Bearer ${user.token}`, // Include 'Bearer ' prefix
+      },
+    });
+    setUserBlogs(userBlogs.filter((blog) => blog._id !== postId));
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "An error occurred while deleting the blog"
+    );
+  }
+};
+
+  
 
   if (isLoading) {
     return (

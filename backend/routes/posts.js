@@ -46,6 +46,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 });
+// get Blog by ID
 router.get('/:id', async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('user','username');
@@ -93,9 +94,10 @@ router.delete("/:id", authMiddleware, async (req, res) => {
       return res.status(403).json({ message: "User not authorized." });
     }
 
-    await post.remove();
+    await post.deleteOne();
     res.json({ message: "Post removed." });
   } catch (err) {
+    console.error('Error deleting post:', err); // Log the error for debugging
     res.status(500).json({ message: "Server error." });
   }
 });
