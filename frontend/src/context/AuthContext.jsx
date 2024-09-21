@@ -4,7 +4,7 @@ import axios from "axios";
 const AuthContext = createContext();
 
 const api = axios.create({
-  baseURL: "https://pendrop-backend.onrender.com/api", // Update this base URL if needed
+  baseURL: import.meta.env.VITE_API_URL,
 });
 export const AuthProvider = ({ children }) => {
   const URL = "https://pendrop-backend.onrender.com";
