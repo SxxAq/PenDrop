@@ -12,14 +12,13 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserBlogs = async () => {
       if (user && user._id) {
-        // Check if user ID is available
-        console.log(user);
+        console.log("Fetching blogs for user ID:", user._id);
 
         try {
-          const res = await axios.get(`/api/users/user/${user._id}`, {
-            headers: { "x-auth-token": user.token }, // Include token for auth
+          const res = await axios.get(`${URL}/api/users/user/${user._id}`, {
+            headers: { "x-auth-token": user.token },
           });
-          setUserBlogs(res.data); // Set user blogs
+          setUserBlogs(res.data);
         } catch (err) {
           setError(
             err.response?.data?.message ||
@@ -32,7 +31,7 @@ const Profile = () => {
     };
 
     fetchUserBlogs();
-  }, [user]);
+  }, [user, URL]);
 
   const handleDelete = async (postId) => {
     try {

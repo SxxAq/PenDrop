@@ -38,7 +38,7 @@ const Navbar = () => {
             <>
               <Link 
                 to="/create" 
-                className="flex items-center px-4 py-2 bg-white text-teal-700 rounded-full hover:bg-teal-100 transition duration-300"
+                className="flex items-center px-4 py-2 mx-2 bg-white text-teal-700 rounded-full hover:bg-teal-100 transition duration-300"
               >
                 <FontAwesomeIcon icon={faPen} size="sm" className="mr-2" />
                 <span className="font-medium">Write</span>
