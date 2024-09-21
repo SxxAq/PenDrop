@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const allowedOrigins = ['https://pendrop-backend.onrender.com']; // Replace with your frontend URL
+const allowedOrigins = ['https://pendrop-frontend.onrender.com']; // Replace with your frontend URL
 
 const corsOptions = {
   origin: allowedOrigins,
