@@ -4,10 +4,10 @@ import axios from "axios";
 const AuthContext = createContext();
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // Update this base URL if needed
+  baseURL: "https://pendrop-backend.onrender.com/api", // Update this base URL if needed
 });
 export const AuthProvider = ({ children }) => {
-  const URL = "http://localhost:5000";
+  const URL = "https://pendrop-backend.onrender.com";
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem("token");
     return token ? { token } : null;
