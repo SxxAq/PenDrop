@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# Build outputs
+build/
+dist/
+out/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Dependency directories
+client/node_modules/
+server/node_modules/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# React/Next.js specific
+.next/
+.cache/
+
+# Test coverage reports
+coverage/
+
+# Miscellaneous
+*.local
+.vscode/
+.idea/
+*.iml
