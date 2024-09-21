@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faPen, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faPen, faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -17,12 +18,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-teal-500 to-teal-700 p-4 md:p-3 shadow-md">
+    <nav className="bg-gradient-to-r from-teal-500 to-teal-700 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-white text-3xl font-bold hover:text-teal-200 transition duration-300">
           PenDrop
         </Link>
-        <div className="flex gap-4 items-center">
+        
+        {/* Mobile menu button */}
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+          className="md:hidden text-white focus:outline-none"
+        >
+          <FontAwesomeIcon icon={faBars} size="lg" />
+        </button>
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex gap-4 items-center">
           {user ? (
             <>
               <Link 
@@ -35,12 +46,12 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="text-white hover:text-teal-200 focus:outline-none transition duration-300 md:mx-4  mr-2 ml-1"
+                  className="text-white hover:text-teal-200 focus:outline-none transition duration-300"
                 >
                   <FontAwesomeIcon icon={faUser} size="lg" />
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-4 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-teal-700 hover:bg-teal-100 transition duration-300"
@@ -71,6 +82,58 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-4">
+          {user ? (
+            <>
+              <Link 
+                to="/create" 
+                className="block py-2 px-4 text-white hover:bg-teal-600 transition duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <FontAwesomeIcon icon={faPen} size="sm" className="mr-2" />
+                Write
+              </Link>
+              <Link
+                to="/profile"
+                className="block py-2 px-4 text-white hover:bg-teal-600 transition duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Profile
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left py-2 px-4 text-white hover:bg-teal-600 transition duration-300"
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link 
+                to="/login" 
+                className="block py-2 px-4 text-white hover:bg-teal-600 transition duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+              <Link 
+                to="/register" 
+                className="block py-2 px-4 text-white hover:bg-teal-600 transition duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      )}
     </nav>
   );
 };

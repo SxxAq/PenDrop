@@ -54,7 +54,7 @@ const Blog = () => {
       )}
       <div className="p-6">
         <h2 className="text-3xl font-bold mb-4 text-teal-700">{post.title}</h2>
-        <p className="text-gray-700 mb-6 whitespace-pre-wrap">{post.content}</p>
+        <p className="text-gray-700 text-xl md:text-lg mb-6 whitespace-pre-wrap">{post.content}</p>
         <div className="flex justify-between text-sm text-gray-500 mb-4">
           <span className="font-semibold text-teal-600">
             Author: {post.user?.username || "Unknown"}

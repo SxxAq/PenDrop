@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
@@ -9,16 +10,16 @@ import Navbar from "./components/Navbar";
 import Blog from "./components/Blog";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100 flex flex-col">
           <Navbar />
-          <div className="container mx-auto px-4 py-8">
+          <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/post/:id" element={<Blog />} />
@@ -42,11 +43,17 @@ function App() {
                 }
               />
             </Routes>
-          </div>
+          </main>
           <ToastContainer
             position="top-right"
             autoClose={3000}
             hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
           />
         </div>
       </Router>

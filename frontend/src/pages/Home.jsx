@@ -9,7 +9,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const { URL } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5; // Number of posts per page
+  const postsPerPage = 5;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,21 +29,17 @@ const Home = () => {
     fetchPosts();
   }, []);
 
-  // Calculate the index of the last and first post on the current page
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // Calculate total pages
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
-  // Change page function
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-teal-500"></div>
       </div>
     );
   }
@@ -53,7 +49,7 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 p-6">
+    <div className="space-y-8">
       {currentPosts.map((post) => (
         <div
           key={post._id}
@@ -64,16 +60,16 @@ const Home = () => {
               <img
                 src={`${URL}${post.imageUrl}`}
                 alt={post.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 sm:h-64 object-cover"
               />
             </Link>
           )}
-          <div className="p-4">
-            <h2 className="text-xl font-semibold mb-2 text-teal-700 hover:text-teal-500 transition duration-300">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-3 text-teal-700 hover:text-teal-500 transition duration-300">
               <Link to={`/post/${post._id}`}>{post.title}</Link>
             </h2>
             <p className="text-gray-600 mb-4 line-clamp-3">{post.content}</p>
-            <div className="flex justify-between text-sm text-gray-500 mb-4">
+            <div className="flex justify-between text-sm text-gray-500">
               <span className="font-semibold text-teal-600">
                 Author: {post.user?.username || "Unknown"}
               </span>
@@ -82,9 +78,8 @@ const Home = () => {
           </div>
         </div>
       ))}
-
-      {/* Pagination Controls */}
-      <div className="flex justify-center mt-6">
+      
+      <div className="flex justify-center mt-8">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
