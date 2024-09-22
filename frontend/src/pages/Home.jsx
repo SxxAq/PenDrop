@@ -7,7 +7,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { URL,api } = useAuth();
+  const { URL, api } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
@@ -16,8 +16,7 @@ const Home = () => {
       try {
         setIsLoading(true);
         const res = await api.get("/posts");
-        const sortedPosts = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setPosts(sortedPosts);
+        setPosts(res.data.reverse());
       } catch (err) {
         setError(
           err.response?.data?.message ||
@@ -79,7 +78,7 @@ const Home = () => {
           </div>
         </div>
       ))}
-      
+
       <div className="flex justify-center mt-8">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
