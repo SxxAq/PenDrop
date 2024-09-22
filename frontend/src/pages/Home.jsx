@@ -7,7 +7,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { URL } = useAuth();
+  const { URL,api } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
@@ -15,7 +15,7 @@ const Home = () => {
     const fetchPosts = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get("/api/posts");
+        const res = await api.get("/api/posts");
         setPosts(res.data);
       } catch (err) {
         setError(

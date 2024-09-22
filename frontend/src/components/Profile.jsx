@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { user, URL } = useAuth();
+  const { user, URL,api } = useAuth();
   const [userBlogs, setUserBlogs] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ const Profile = () => {
         console.log("Fetching blogs for user ID:", user._id);
 
         try {
-          const res = await axios.get(`${URL}/api/users/user/${user._id}`, {
+          const res = await api.get(`${URL}/api/users/user/${user._id}`, {
             headers: { "x-auth-token": user.token },
           });
           setUserBlogs(res.data);
@@ -36,7 +36,7 @@ const Profile = () => {
 const handleDelete = async (postId) => {
   console.log('Token:', user.token); // Check the token here
   try {
-    await axios.delete(`/api/posts/${postId}`, {
+    await api.delete(`/api/posts/${postId}`, {
       headers: {
         "Authorization": `Bearer ${user.token}`, // Include 'Bearer ' prefix
       },

@@ -8,12 +8,12 @@ const Blog = () => {
   const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user, URL } = useAuth();
+  const { user, URL, api } = useAuth();
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get(`/api/posts/${id}`);
+        const res = await api.get(`/api/posts/${id}`);
         setPost(res.data);
       } catch (err) {
         setError(

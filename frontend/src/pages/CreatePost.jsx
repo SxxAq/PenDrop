@@ -9,7 +9,7 @@ const CreatePost = () => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
-  const { user } = useAuth();
+  const { user,api } = useAuth();
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -34,7 +34,7 @@ const CreatePost = () => {
     }
 
     try {
-      await axios.post('/api/posts', formData, {
+      await api.post('/api/posts', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

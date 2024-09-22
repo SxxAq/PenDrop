@@ -9,13 +9,13 @@ const EditPost = () => {
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user,api } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`/api/posts/${id}`);
+        const res = await api.get(`/api/posts/${id}`);
         setTitle(res.data.title);
         setContent(res.data.content);
       } catch (error) {
@@ -35,7 +35,7 @@ const EditPost = () => {
       return;
     }
     try {
-      await axios.put(
+      await api.put(
         `/api/posts/${id}`,
         { title, content },
         {
