@@ -33,7 +33,7 @@ const Profile = () => {
   const handleDelete = async (postId) => {
     console.log("Token:", user.token); // Check the token here
     try {
-      await api.delete(`/api/posts/${postId}`, {
+      await api.delete(`/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${user.token}`, // Include 'Bearer ' prefix
         },

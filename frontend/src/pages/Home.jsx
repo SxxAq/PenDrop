@@ -15,7 +15,7 @@ const Home = () => {
     const fetchPosts = async () => {
       try {
         setIsLoading(true);
-        const res = await api.get("/api/posts");
+        const res = await api.get("/posts");
         setPosts(res.data);
       } catch (err) {
         setError(

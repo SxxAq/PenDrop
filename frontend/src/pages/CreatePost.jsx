@@ -34,7 +34,7 @@ const CreatePost = () => {
     }
 
     try {
-      await api.post('/api/posts', formData, {
+      await api.post('/posts', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

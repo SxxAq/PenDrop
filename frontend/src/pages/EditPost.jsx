@@ -15,7 +15,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await api.get(`/api/posts/${id}`);
+        const res = await api.get(`/posts/${id}`);
         setTitle(res.data.title);
         setContent(res.data.content);
       } catch (error) {
@@ -36,7 +36,7 @@ const EditPost = () => {
     }
     try {
       await api.put(
-        `/api/posts/${id}`,
+        `/posts/${id}`,
         { title, content },
         {
           headers: { Authorization: `Bearer ${token}` },
