@@ -13,14 +13,10 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const allowedOrigins = ['https://pendrop-frontend.onrender.com']; // Replace with your frontend URL
-
 const corsOptions = {
-  origin: allowedOrigins,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow credentials if needed (like cookies)
-  optionsSuccessStatus: 204 // Some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  origin: 'https://pendrop-frontend.onrender.com',
+  optionsSuccessStatus: 200
+}
 
 // Use CORS middleware
 app.use(cors(corsOptions));
