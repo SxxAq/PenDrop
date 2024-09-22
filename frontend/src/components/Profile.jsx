@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { user, URL,api } = useAuth();
+  const { user, URL, api } = useAuth();
   const [userBlogs, setUserBlogs] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,10 +12,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserBlogs = async () => {
       if (user && user._id) {
-        console.log("Fetching blogs for user ID:", user._id);
-
         try {
-          const res = await api.get(`${URL}/api/users/user/${user._id}`, {
+          const res = await api.get(`/users/user/${user._id}`, {
             headers: { "x-auth-token": user.token },
           });
           setUserBlogs(res.data);
@@ -29,28 +27,25 @@ const Profile = () => {
         }
       }
     };
-
     fetchUserBlogs();
-  }, [user, URL]);
+  }, [user, api]);
 
-const handleDelete = async (postId) => {
-  console.log('Token:', user.token); // Check the token here
-  try {
-    await api.delete(`/api/posts/${postId}`, {
-      headers: {
-        "Authorization": `Bearer ${user.token}`, // Include 'Bearer ' prefix
-      },
-    });
-    setUserBlogs(userBlogs.filter((blog) => blog._id !== postId));
-  } catch (err) {
-    setError(
-      err.response?.data?.message ||
-      "An error occurred while deleting the blog"
-    );
-  }
-};
-
-  
+  const handleDelete = async (postId) => {
+    console.log("Token:", user.token); // Check the token here
+    try {
+      await api.delete(`/api/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`, // Include 'Bearer ' prefix
+        },
+      });
+      setUserBlogs(userBlogs.filter((blog) => blog._id !== postId));
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+          "An error occurred while deleting the blog"
+      );
+    }
+  };
 
   if (isLoading) {
     return (
