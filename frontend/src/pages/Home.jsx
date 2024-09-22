@@ -16,7 +16,7 @@ const Home = () => {
       try {
         setIsLoading(true);
         const res = await axios.get("/api/posts");
-        setPosts(res.data);
+        setPosts(res.data.reverse());
       } catch (err) {
         setError(
           err.response?.data?.message ||
