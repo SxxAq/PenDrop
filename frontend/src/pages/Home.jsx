@@ -16,7 +16,8 @@ const Home = () => {
       try {
         setIsLoading(true);
         const res = await api.get("/posts");
-        setPosts(res.data);
+        const sortedPosts = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sortedPosts);
       } catch (err) {
         setError(
           err.response?.data?.message ||
