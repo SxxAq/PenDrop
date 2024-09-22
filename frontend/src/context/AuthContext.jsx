@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: process.env.VITE_API_URL
 });
 export const AuthProvider = ({ children }) => {
-  
+  const URL = "https://pendrop-backend.onrender.com";
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem("token");
     return token ? { token } : null;
